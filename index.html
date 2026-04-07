@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Insight | News & Currency</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <h1 class="app-title">🌍 Global Insight</h1>
+            <p class="app-subtitle">Real-time News & Currency Exchange</p>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <section class="controls-section">
+            <label for="country-select" class="sr-only">select your country</label>
+            <select id="country-select" class="country-select"></select>
+        </section>
+
+        <section class="dashboard-grid">
+            <div class="news-panel">
+                <h2 class="section-title">latest headlines</h2>
+                <div id="news-container" class="news-container">
+                    <p class="loading-message">fetching headlines...</p>
+                </div>
+            </div>
+
+            <aside class="currency-panel">
+                <h2 class="section-title">market watch</h2>
+                <div id="currency-info" class="currency-info">
+                    <p class="loading-message">updating rates...</p>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2024 global insight. all rights reserved.</p>
+            <p>powered by <a href="https://gnews.io/" target="_blank" rel="noopener noreferrer">gnews api</a> & <a href="https://www.frankfurter.app/" target="_blank" rel="noopener noreferrer">frankfurter api</a></p>
+        </div>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

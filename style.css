@@ -1,0 +1,287 @@
+/* global styles and variables */
+:root {
+    --primary-color: #2563eb; /* blue */
+    --secondary-color: #64748b; /* slate grey */
+    --background-color: #f8fafc; /* soft off-white */
+    --text-color: #334155; /* dark slate */
+    --card-background: #ffffff;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+}
+
+/* general body and typography */
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+h1, h2, h3 {
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* header */
+.header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px var(--shadow-medium);
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.app-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* main content layout */
+.main-content {
+    padding-top: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+}
+
+.dashboard-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: 1fr; /* default to single column */
+}
+
+/* controls section */
+.controls-section {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.country-select {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.8rem var(--spacing-sm);
+    font-size: 1rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    background-color: var(--card-background);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px var(--shadow-light);
+}
+
+/* section titles */
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+/* news panel */
+.news-container {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.news-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px var(--shadow-light), 0 2px 4px -2px var(--shadow-light);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 15px -3px var(--shadow-medium), 0 4px 6px -4px var(--shadow-medium);
+}
+
+.news-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background-color: var(--background-color); /* fallback for broken images */
+}
+
+.news-card-content {
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.news-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    flex-grow: 1;
+}
+
+.news-card-description {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.read-more {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* currency panel */
+.currency-panel {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    box-shadow: 0 4px 6px -1px var(--shadow-light), 0 2px 4px -2px var(--shadow-light);
+    text-align: center;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.currency-rate {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.currency-timestamp {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.currency-base {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* loading indicators and error messages */
+.loading-message, .error-message {
+    text-align: center;
+    padding: var(--spacing-lg);
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+    grid-column: 1 / -1; /* span across all columns in grid */
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.error-message {
+    color: #dc2626; /* red for errors */
+}
+
+/* footer */
+.footer {
+    background-color: var(--text-color);
+    color: var(--background-color);
+    padding: var(--spacing-md) 0;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: var(--spacing-lg);
+}
+
+.footer-content a {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* responsive design for desktop */
+@media (min-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 2.5fr 1fr; /* news takes more space, currency is sidebar */
+    }
+
+    .news-panel {
+        order: 1; /* news on left */
+    }
+
+    .currency-panel {
+        order: 2; /* currency on right */
+        align-self: start; /* stick to the top */
+        position: sticky; /* make it sticky on scroll */
+        top: var(--spacing-md); /* adjust as needed */
+    }
+    
+    .news-container {
+        grid-template-columns: repeat(2, 1fr); /* two columns for news on medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .news-container {
+        grid-template-columns: repeat(3, 1fr); /* three columns for news on larger screens */
+    }
+}
