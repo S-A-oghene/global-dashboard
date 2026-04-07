@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Insight | News & Currency</title>
+    <meta name="description" content="Global Insight Dashboard: Real-time news headlines and currency exchange rates for countries worldwide.">
+    <meta name="keywords" content="news, currency, exchange rates, global news, forex">
+    <meta name="author" content="Global Insight">
+    <meta name="theme-color" content="#2563eb">
+    <title>Global Insight | Real-time News & Currency Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -17,22 +21,22 @@
 
     <main class="container main-content">
         <section class="controls-section">
-            <label for="country-select" class="sr-only">select your country</label>
-            <select id="country-select" class="country-select"></select>
+            <label for="country-select" class="country-label">Select Country:</label>
+            <select id="country-select" class="country-select" aria-label="Select a country to view news and exchange rates"></select>
         </section>
 
         <section class="dashboard-grid">
             <div class="news-panel">
-                <h2 class="section-title">latest headlines</h2>
+                <h2 class="section-title">Latest Headlines</h2>
                 <div id="news-container" class="news-container">
-                    <p class="loading-message">fetching headlines...</p>
+                    <p class="loading-message">Fetching headlines...</p>
                 </div>
             </div>
 
             <aside class="currency-panel">
-                <h2 class="section-title">market watch</h2>
+                <h2 class="section-title">Market Watch</h2>
                 <div id="currency-info" class="currency-info">
-                    <p class="loading-message">updating rates...</p>
+                    <p class="loading-message">Updating rates...</p>
                 </div>
             </aside>
         </section>
@@ -40,8 +44,8 @@
 
     <footer class="footer">
         <div class="container footer-content">
-            <p>&copy; 2024 global insight. all rights reserved.</p>
-            <p>powered by <a href="https://gnews.io/" target="_blank" rel="noopener noreferrer">gnews api</a> & <a href="https://www.frankfurter.app/" target="_blank" rel="noopener noreferrer">frankfurter api</a></p>
+            <p>&copy; 2024 Global Insight. All rights reserved.</p>
+            <p>Powered by <a href="https://gnews.io/" target="_blank" rel="noopener noreferrer">GNews API</a> &amp; <a href="https://www.frankfurter.app/" target="_blank" rel="noopener noreferrer">Frankfurter API</a></p>
         </div>
     </footer>
 
