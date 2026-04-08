@@ -13,7 +13,7 @@
 // CONFIGURATION & CONSTANTS
 // ============================================================================
 
-const GNEWS_API_TOKEN = e4975963cfb5eb46f561b6fcbfbeb1eb; // Replace with your actual GNews API token
+const GNEWS_API_TOKEN = 'e4975963cfb5eb46f561b6fcbfbeb1eb'; // Replace with your actual GNews API token
 const GNEWS_BASE_URL = 'https://gnews.io/api/v4/top-headlines';
 const FRANKFURTER_BASE_URL = 'https://api.frankfurter.app/latest';
 
@@ -168,6 +168,7 @@ async function fetchNews(countryCode) {
     
     try {
         const url = `${GNEWS_BASE_URL}?country=${countryCode}&token=${GNEWS_API_TOKEN}&lang=en&max=6`;
+        console.log('🔍 Fetching news from URL:', url);
         const response = await fetch(url);
         
         if (!response.ok) {
@@ -175,13 +176,16 @@ async function fetchNews(countryCode) {
         }
         
         const data = await response.json();
+        console.log('✅ News data received:', data);
         
         if (!data.articles || !Array.isArray(data.articles)) {
             throw new Error('Invalid response format from GNews API');
         }
         
+        console.log(`📰 Found ${data.articles.length} articles`);
         return data.articles;
     } catch (error) {
+        console.error('❌ News fetch error:', error);
         throw new Error(`Failed to fetch news: ${error.message}`);
     }
 }
@@ -202,6 +206,7 @@ async function fetchNews(countryCode) {
 async function fetchRate(targetCurrency) {
     try {
         const url = `${FRANKFURTER_BASE_URL}?from=USD&to=${targetCurrency}`;
+        console.log('🔍 Fetching exchange rate from URL:', url);
         const response = await fetch(url);
         
         if (!response.ok) {
@@ -209,13 +214,16 @@ async function fetchRate(targetCurrency) {
         }
         
         const data = await response.json();
+        console.log('✅ Exchange rate data received:', data);
         
         if (!data.rates || !data.rates[targetCurrency]) {
             throw new Error(`No rate data for currency ${targetCurrency}`);
         }
         
+        console.log(`💱 Exchange rate: 1 USD = ${data.rates[targetCurrency]} ${targetCurrency}`);
         return data.rates[targetCurrency];
     } catch (error) {
+        console.error('❌ Exchange rate fetch error:', error);
         throw new Error(`Failed to fetch exchange rate: ${error.message}`);
     }
 }
@@ -241,6 +249,8 @@ async function updateDashboard(countryCode) {
         return;
     }
 
+    console.log(`🌍 Loading data for country: ${country.name} (${countryCode}) - Currency: ${country.currency}`);
+
     // Show loading indicators while fetching data
     renderLoading(newsContainer, 'Fetching headlines...');
     renderLoading(currencyInfo, 'Updating rates...');
@@ -252,11 +262,13 @@ async function updateDashboard(countryCode) {
             fetchRate(country.currency)
         ]);
         
+        console.log('✅ All data fetched successfully');
         // Render the fetched data
         renderNews(articles);
         renderCurrency(rate, country);
     } catch (error) {
         // Display friendly error messages instead of crashing
+        console.error('❌ Dashboard update error:', error.message);
         renderError(newsContainer, error.message);
         renderError(currencyInfo, error.message);
     }
@@ -302,6 +314,19 @@ function getUserPreference() {
  * This function is called when the DOM is fully loaded.
  */
 function init() {
+    console.log('🚀 Initializing Global Insight Dashboard...');
+    
+    // Verify DOM elements exist
+    if (!countrySelect || !newsContainer || !currencyInfo) {
+        console.error('❌ CRITICAL: DOM elements not found!');
+        console.error('countrySelect:', countrySelect);
+        console.error('newsContainer:', newsContainer);
+        console.error('currencyInfo:', currencyInfo);
+        return;
+    }
+    
+    console.log('✅ DOM elements found');
+    
     // Populate the country dropdown with all available countries
     countries.forEach(country => {
         const option = document.createElement('option');
@@ -309,14 +334,18 @@ function init() {
         option.textContent = country.name;
         countrySelect.appendChild(option);
     });
+    
+    console.log(`✅ Dropdown populated with ${countries.length} countries`);
 
     // Load saved preference from localStorage or default to 'us'
     const savedCountryCode = getUserPreference();
     countrySelect.value = savedCountryCode;
+    console.log(`✅ Saved preference loaded: ${savedCountryCode}`);
 
     // Add event listener for country selection changes
     countrySelect.addEventListener('change', (event) => {
         const newCountryCode = event.target.value;
+        console.log(`🔄 Country changed to: ${newCountryCode}`);
         
         // Save the new preference to localStorage
         saveUserPreference(newCountryCode);
@@ -325,7 +354,10 @@ function init() {
         updateDashboard(newCountryCode);
     });
 
+    console.log('✅ Event listeners attached');
+    
     // Perform initial dashboard update with the saved (or default) country
+    console.log('📊 Performing initial dashboard update...');
     updateDashboard(savedCountryCode);
 }
 
@@ -333,5 +365,11 @@ function init() {
 // APPLICATION STARTUP
 // ============================================================================
 
+console.log('📱 Global Insight Dashboard script loaded');
+console.log('🔑 API Token present:', !!GNEWS_API_TOKEN && GNEWS_API_TOKEN !== 'YOUR_GNEWS_API_TOKEN_HERE');
+
 // Initialize the application when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('✅ DOM fully loaded, initializing app...');
+    init();
+});
