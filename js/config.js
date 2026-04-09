@@ -15,3 +15,6 @@ export const countries = [
 
 export const PLACEHOLDER_IMAGE = 'https://placehold.co/300x200?text=No+Image+Available';
 export const FALLBACK_DESCRIPTION = 'No description available for this article.';
+
+// CORS Proxy fallback (used only if direct fetch fails)
+export const CORS_PROXY = 'https://corsproxy.io/?';
