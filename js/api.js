@@ -57,6 +57,12 @@ export async function fetchNews(countryCode) {
 }
 
 export async function fetchRate(targetCurrency) {
+    // Special case: USD to USD is always 1
+    if (targetCurrency === 'USD') {
+        console.log('💱 USD to USD rate: 1');
+        return 1;
+    }
+
     const url = `${FRANKFURTER_BASE_URL}?from=USD`;
     
     const response = await fetchWithFallback(url, 'Frankfurter API');
@@ -74,5 +80,7 @@ export async function fetchRate(targetCurrency) {
     if (typeof rate !== 'number') {
         throw new Error(`Currency ${targetCurrency} is not supported by Frankfurter API.`);
     }
+
+    console.log(`💱 Rate for ${targetCurrency}: ${rate}`);
     return rate;
 }
